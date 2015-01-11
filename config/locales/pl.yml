@@ -1,0 +1,22 @@
+#encoding: utf-8
+pl:
+  layouts:
+    application:
+      title:       "Pragmatyczny regał"
+      home:        "Strona główna"
+      questions:   "Pytania"
+      news:        "Aktualności"
+      contact:     "Kontakt"
+  carts:
+    cart:
+      title:       "Twoja karta"
+      empty:       "Opróżnij kartę"
+      checkout:    "Do kasy"
+  number:
+    currency:
+      format:
+        unit:      "zł"
+        precision: 2
+        separator: ","
+        delimiter: "&nbsp;"
+        format:    "%n&nbsp;%u"

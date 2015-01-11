@@ -4,6 +4,8 @@ class LineItemsController < ApplicationController
 
   before_action :set_line_item, only: [:show, :edit, :update, :destroy]
 
+  skip_before_action :authorize, only: :create
+
   # GET /line_items
   # GET /line_items.json
   def index
@@ -32,7 +34,8 @@ class LineItemsController < ApplicationController
 
     respond_to do |format|
       if @line_item.save
-        format.html { redirect_to @cart, notice: 'Line item was successfully created.' }
+        format.html { redirect_to store_url }
+        format.js { @current_item = @line_item }
         format.json { render :show, status: :created, location: @line_item }
       else
         format.html { render :new }
