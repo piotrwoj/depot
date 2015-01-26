@@ -4,7 +4,7 @@ working_directory "/app/depot/current"
 
 # Unicorn PID file location
 # pid "/path/to/pids/unicorn.pid"
-pid "/app/depot/current/unicorn.pid"
+pid "/app/depot/current/tmp/pids/unicorn.pid"
 
 # Path to logs
 # stderr_path "/path/to/log/unicorn.log"
@@ -14,7 +14,7 @@ stdout_path "/app/depot/current/log/unicorn.log"
 
 # Unicorn socket
 #listen "/tmp/unicorn.[app name].sock"
-listen "/tmp/unicorn.depot.sock"
+listen "/app/depot/current/tmp/sockets/unicorn.depot.sock"
 
 # Number of processes
 # worker_processes 4
