@@ -1,6 +1,8 @@
 # config valid only for current version of Capistrano
 lock '3.3.5'
 
+server "188.166.12.183", :web, :app, :db, primary: true
+
 set :application, 'depot'
 set :repo_url, 'git@github.com:piotrwoj/depot.git'
 
