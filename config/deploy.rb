@@ -1,10 +1,9 @@
 # config valid only for current version of Capistrano
 lock '3.3.5'
 
-server "188.166.12.183", :web, :app, :db, primary: true
-
 set :application, 'depot'
 set :repo_url, 'git@github.com:piotrwoj/depot.git'
+set :rbenv_ruby, '2.1.5'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
@@ -13,8 +12,7 @@ set :repo_url, 'git@github.com:piotrwoj/depot.git'
 set :deploy_to, '/app/depot'
 
 # Default value for :scm is :git
-set :scm, :git
-set :branch, "master"
+# set :scm, :git
 
 # Default value for :format is :pretty
 # set :format, :pretty
@@ -38,13 +36,6 @@ set :branch, "master"
 # set :keep_releases, 5
 
 namespace :deploy do
-
-  %w[start stop restart].each do |command|
-    desc "#{command} unicorn server"
-    task command, roles: :app, except: {no_release: true} do
-      run "/etc/init.d/unicorn_#{application} #{command}"
-    end
-  end
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
