@@ -46,12 +46,23 @@ namespace :deploy do
   #    execute "service thin restart; service nginx restart"
   #  end
   #end
+  
+  desc "Creating tmp dir" 
+  task :make_tmp do
+    on roles(:web) do
+      execute "mkdir /app/depot/current/tmp; mkdir /app/depot/current/tmp/pids; mkdir /app/depot/current/tmp/sockets"
+      execute "ln -sf /app/depot/current/config/nginx.conf /etc/nginx/sites-enabled/depot"
+      execute "chmod a+x /app/depot/current/config/unicorn_init.sh"
+      execute "ln -sf /app/depot/current/config/unicorn_init.sh /etc/init.d/unicorn_depot"
+    end
+  end
 
+  after :publishing, :make_tmp
   after :publishing, :restart
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      execute "echo 'XXXXXXXXXXXXXXXXXXXXXX'"
+      execute "service unicorn_depot restart; service nginx restart"
     end
   end
 
