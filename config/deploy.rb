@@ -37,16 +37,21 @@ set :deploy_to, '/app/depot'
 
 namespace :deploy do
 
-  after :publishing do
-    execute "mkdir tmp"
-  end
+  #desc "Creating tmp dir"
+  #after :publishing, :restart
+  
+  #desc 'Restart application'
+  #task :restart do
+  #  on roles(:app), in: :sequence, wait: 5 do
+  #    execute "service thin restart; service nginx restart"
+  #  end
+  #end
+
+  after :publishing, :restart
 
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
-      # Here we can do anything such as:
-      # within release_path do
-      #   execute :rake, 'cache:clear'
-      # end
+      execute "echo 'XXXXXXXXXXXXXXXXXXXXXX'"
     end
   end
 
