@@ -37,6 +37,10 @@ set :deploy_to, '/app/depot'
 
 namespace :deploy do
 
+  after :publishing do
+    execute "mkdir tmp"
+  end
+
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:

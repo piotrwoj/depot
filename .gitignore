@@ -17,3 +17,5 @@
 
 unicorn.pid
 public/assets/
+
+/.capistrano/
