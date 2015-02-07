@@ -50,10 +50,10 @@ namespace :deploy do
   desc "Creating tmp dir" 
   task :make_tmp do
     on roles(:web) do
-      execute "mkdir /app/depot/current/tmp; mkdir /app/depot/current/tmp/pids; mkdir /app/depot/current/tmp/sockets"
-      execute "ln -sf /app/depot/current/config/nginx.conf /etc/nginx/sites-enabled/depot"
-      execute "chmod a+x /app/depot/current/config/unicorn_init.sh"
-      execute "ln -sf /app/depot/current/config/unicorn_init.sh /etc/init.d/unicorn_depot"
+      #execute "mkdir /app/depot/current/tmp; mkdir /app/depot/current/tmp/pids; mkdir /app/depot/current/tmp/sockets"
+      execute "ln -sf #{fetch :deploy_to}/current/config/nginx.conf /etc/nginx/sites-enabled/depot"
+      execute "chmod a+x #{fetch :deploy_to}/current/config/unicorn_init.sh"
+      execute "ln -sf #{fetch :deploy_to}/current/config/unicorn_init.sh /etc/init.d/unicorn_depot"
     end
   end
 

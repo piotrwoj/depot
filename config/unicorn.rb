@@ -4,7 +4,8 @@ working_directory "/app/depot/current"
 
 # Unicorn PID file location
 # pid "/path/to/pids/unicorn.pid"
-pid "/app/depot/current/tmp/pids/unicorn.pid"
+#pid "/app/depot/current/tmp/pids/unicorn.pid"
+pid "/app/depot/shared/unicorn.pid"
 
 # Path to logs
 # stderr_path "/path/to/log/unicorn.log"
