@@ -15,7 +15,8 @@ stdout_path "/app/depot/current/log/unicorn.log"
 
 # Unicorn socket
 #listen "/tmp/unicorn.[app name].sock"
-listen "/app/depot/current/tmp/sockets/unicorn.depot.sock"
+#listen "/app/depot/current/tmp/sockets/unicorn.depot.sock"
+listen "/app/depot/shared/unicorn.depot.sock"
 
 # Number of processes
 # worker_processes 4
