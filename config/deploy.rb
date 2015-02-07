@@ -37,33 +37,16 @@ set :deploy_to, '/app/depot'
 
 namespace :deploy do
 
-  #desc "Creating tmp dir"
-  #after :publishing, :restart
-  
-  #desc 'Restart application'
-  #task :restart do
-  #  on roles(:app), in: :sequence, wait: 5 do
-  #    execute "service thin restart; service nginx restart"
-  #  end
-  #end
-  
-  desc "Creating tmp dir" 
-  task :make_tmp do
-    on roles(:web) do
-      #execute "mkdir /app/depot/current/tmp; mkdir /app/depot/current/tmp/pids; mkdir /app/depot/current/tmp/sockets"
+  task :restart do
+    on roles(:web, :app, :db) do
+      #execute "mkdir /app/depot/current/tmp; mkdir /app/depot/current/tmp/pids; mkdir /app/depot/current/tmp/sockets" # w koncu require 'capistrano/rails/assets' to robi
       execute "ln -sf #{fetch :deploy_to}/current/config/nginx.conf /etc/nginx/sites-enabled/depot"
       execute "chmod a+x #{fetch :deploy_to}/current/config/unicorn_init.sh"
       execute "ln -sf #{fetch :deploy_to}/current/config/unicorn_init.sh /etc/init.d/unicorn_depot"
-    end
-  end
-
-  after :publishing, :make_tmp
-  after :publishing, :restart
-
-  after :restart, :clear_cache do
-    on roles(:web), in: :groups, limit: 3, wait: 10 do
       execute "service unicorn_depot restart; service nginx restart"
     end
   end
+
+  after :publishing, :restart
 
 end
