@@ -12,11 +12,11 @@ set -e
 TIMEOUT=${TIMEOUT-60}
 APP_ROOT=/app/depot
 APP_CURRENT=$APP_ROOT/current
-APP_USER=root
+APP_USER=app
 PID=$APP_ROOT/shared/unicorn.pid
 #PID=$APP_CURRENT/tmp/pids/unicorn.pid
 ENV=production
-CMD="cd $APP_CURRENT && /root/.rbenv/shims/bundle exec unicorn_rails -E $ENV -D -c $APP_CURRENT/config/unicorn.rb"
+CMD="cd $APP_CURRENT && /app/.rbenv/shims/bundle exec unicorn_rails -E $ENV -D -c $APP_CURRENT/config/unicorn.rb"
 action="$1"
 set -u
 

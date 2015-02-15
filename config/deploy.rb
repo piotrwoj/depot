@@ -40,9 +40,11 @@ namespace :deploy do
   task :restart do
     on roles(:web, :app, :db) do
       #execute "mkdir /app/depot/current/tmp; mkdir /app/depot/current/tmp/pids; mkdir /app/depot/current/tmp/sockets" # w koncu require 'capistrano/rails/assets' to robi
-      execute "ln -sf #{fetch :deploy_to}/current/config/nginx.conf /etc/nginx/sites-enabled/depot"
+      #execute "ln -sf #{fetch :deploy_to}/current/config/nginx.conf /etc/nginx/sites-enabled/depot" #gdy uzytkownik rootem
       execute "chmod a+x #{fetch :deploy_to}/current/config/unicorn_init.sh"
-      execute "ln -sf #{fetch :deploy_to}/current/config/unicorn_init.sh /etc/init.d/unicorn_depot"
+      #execute "ln -sf #{fetch :deploy_to}/current/config/unicorn_init.sh /etc/init.d/unicorn_depot" #gdy uzytkownik rootem
+      execute "cp #{fetch :deploy_to}/current/config/unicorn_init.sh #{fetch :deploy_to}/shared"
+      execute "cp #{fetch :deploy_to}/current/config/nginx.conf #{fetch :deploy_to}/shared"
       execute "service unicorn_depot restart; service nginx restart"
     end
   end
