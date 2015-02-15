@@ -16,7 +16,7 @@ APP_USER=app
 PID=$APP_ROOT/shared/unicorn.pid
 #PID=$APP_CURRENT/tmp/pids/unicorn.pid
 ENV=production
-CMD="cd $APP_CURRENT && /app/.rbenv/shims/bundle exec unicorn_rails -E $ENV -D -c $APP_CURRENT/config/unicorn.rb"
+CMD="cd $APP_CURRENT && /home/app/.rbenv/shims/bundle exec unicorn_rails -E $ENV -D -c $APP_CURRENT/config/unicorn.rb"
 action="$1"
 set -u
 
