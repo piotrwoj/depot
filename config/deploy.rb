@@ -46,6 +46,7 @@ namespace :deploy do
       execute "ln -sf #{fetch :deploy_to}/current/config/unicorn_init.sh /etc/init.d/unicorn_depot" #gdy uzytkownik rootem
       #execute "cp #{fetch :deploy_to}/current/config/unicorn_init.sh #{fetch :deploy_to}/shared"
       #execute "cp #{fetch :deploy_to}/current/config/nginx.conf #{fetch :deploy_to}/shared"
+      execute "chown -R app #{fetch :deploy_to}"
       execute "service unicorn_depot restart; service nginx restart"
     end
   end
