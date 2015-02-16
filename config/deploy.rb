@@ -3,6 +3,7 @@ lock '3.3.5'
 
 set :application, 'depot'
 set :repo_url, 'git@github.com:piotrwoj/depot.git'
+set :rbenv_custom_path, '/home/app/.rbenv'
 set :rbenv_ruby, '2.1.5'
 
 # Default branch is :master
